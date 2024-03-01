@@ -6,30 +6,20 @@ source registerEnrollOrderer.sh
 mkdir -p "compose/compose-ca/"
 mkdir -p "compose/compose-peers/"
 
-NETWORK_NAME="port-network"
+NETWORK_NAME="food-supply-network"
 
 declare -a orderers=(
     "orderer:OrdererMSP:7050:7053:9443"
 )
 
 declare -a peers=(
-    "couchdb0:4984:peer0:buyer:8051:8052:9444:BuyerMSP"
-    "couchdb1:6984:peer0:buyerbank:9051:9052:9445:BuyerBankMSP"
-    "couchdb2:7984:peer0:buyercp:1051:1052:9446:BuyerCPMSP"
-    "couchdb3:8984:peer0:middlebank:1151:1152:9447:MiddleBankMSP"
-    "couchdb4:9984:peer0:seller:1251:1252:9448:SellerMSP"
-    "couchdb5:1084:peer0:sellerbank:1351:1352:9449:SellerBankMSP"
-    "couchdb6:1184:peer0:sellercp:1451:1452:9450:SellerCPMSP"
+    # "couchdb0:4984:peer0:buyer:8051:8052:9444:BuyerMSP"
+    "couchdb0:4984:peer0:organicfood:8051:8052:9444:OrganicFoodMSP"
 )
 
 declare -a ca_orgs=(
-    "Buyer:buyer:8054:18054"
-    "BuyerBank:buyerbank:9054:19054"
-    "Buyercp:buyercp:1054:11054"
-    "MiddleBank:middlebank:1154:11154"
-    "Seller:seller:1254:11254"
-    "SellerBank:sellerbank:1354:11354"
-    "SellerCP:sellercp:1454:11454"
+    # "Buyer:buyer:8054:18054"
+    "OrganicFood:organicfood:8054:18054"
 )
 
 declare -a ca_orderer_orgs=(

@@ -16,152 +16,26 @@ Organizations:
     OrdererEndpoints:
       - orderer.example.com:7050
 
-  - &Buyer
-    Name: BuyerMSP
-    ID: BuyerMSP
-    MSPDir: ../organizations/peerOrganizations/buyer.example.com/msp
+  - &OrganicFood
+    Name: OrganicFoodMSP
+    ID: OrganicFoodMSP
+    MSPDir: ../organizations/peerOrganizations/organicfood.example.com/msp
     Policies:
       Readers:
         Type: Signature
-        Rule: "OR('BuyerMSP.admin', 'BuyerMSP.peer', 'BuyerMSP.client')"
+        Rule: "OR('OrganicFoodMSP.admin', 'OrganicFoodMSP.peer', 'OrganicFoodMSP.client')"
       Writers:
         Type: Signature
-        Rule: "OR('BuyerMSP.admin', 'BuyerMSP.client')"
+        Rule: "OR('OrganicFoodMSP.admin', 'OrganicFoodMSP.client')"
       Admins:
         Type: Signature
-        Rule: "OR('BuyerMSP.admin')"
+        Rule: "OR('OrganicFoodMSP.admin')"
       Endorsement:
         Type: Signature
-        Rule: "OR('BuyerMSP.peer')"
+        Rule: "OR('OrganicFoodMSP.peer')"
     AnchorPeers:
-      - Host: peer0.buyer.example.com
+      - Host: peer0.organicfood.example.com
         Port: 8051
-
-  - &BuyerBank
-    Name: BuyerBankMSP
-    ID: BuyerBankMSP
-    MSPDir: ../organizations/peerOrganizations/buyerbank.example.com/msp
-    Policies:
-      Readers:
-        Type: Signature
-        Rule: "OR('BuyerBankMSP.admin', 'BuyerBankMSP.peer', 'BuyerBankMSP.client')"
-      Writers:
-        Type: Signature
-        Rule: "OR('BuyerBankMSP.admin', 'BuyerBankMSP.client')"
-      Admins:
-        Type: Signature
-        Rule: "OR('BuyerBankMSP.admin')"
-      Endorsement:
-        Type: Signature
-        Rule: "OR('BuyerBankMSP.peer')"
-    AnchorPeers:
-      - Host: peer0.buyerbank.example.com
-        Port: 9051
-
-  - &BuyerCP
-    Name: BuyerCPMSP
-    ID: BuyerCPMSP
-    MSPDir: ../organizations/peerOrganizations/buyercp.example.com/msp
-    Policies:
-      Readers:
-        Type: Signature
-        Rule: "OR('BuyerCPMSP.admin', 'BuyerCPMSP.peer', 'BuyerCPMSP.client')"
-      Writers:
-        Type: Signature
-        Rule: "OR('BuyerCPMSP.admin', 'BuyerCPMSP.client')"
-      Admins:
-        Type: Signature
-        Rule: "OR('BuyerCPMSP.admin')"
-      Endorsement:
-        Type: Signature
-        Rule: "OR('BuyerCPMSP.peer')"
-    AnchorPeers:
-      - Host: peer0.buyercp.example.com
-        Port: 1051
-  
-  - &MiddleBank
-    Name: MiddleBankMSP
-    ID: MiddleBankMSP
-    MSPDir: ../organizations/peerOrganizations/middlebank.example.com/msp
-    Policies:
-      Readers:
-        Type: Signature
-        Rule: "OR('MiddleBankMSP.admin', 'MiddleBankMSP.peer', 'MiddleBankMSP.client')"
-      Writers:
-        Type: Signature
-        Rule: "OR('MiddleBankMSP.admin', 'MiddleBankMSP.client')"
-      Admins:
-        Type: Signature
-        Rule: "OR('MiddleBankMSP.admin')"
-      Endorsement:
-        Type: Signature
-        Rule: "OR('MiddleBankMSP.peer')"
-    AnchorPeers:
-      - Host: peer0.middlebank.example.com
-        Port: 1151
-
-  - &Seller
-    Name: SellerMSP
-    ID: SellerMSP
-    MSPDir: ../organizations/peerOrganizations/seller.example.com/msp
-    Policies:
-      Readers:
-        Type: Signature
-        Rule: "OR('SellerMSP.admin', 'SellerMSP.peer', 'SellerMSP.client')"
-      Writers:
-        Type: Signature
-        Rule: "OR('SellerMSP.admin', 'SellerMSP.client')"
-      Admins:
-        Type: Signature
-        Rule: "OR('SellerMSP.admin')"
-      Endorsement:
-        Type: Signature
-        Rule: "OR('SellerMSP.peer')"
-    AnchorPeers:
-      - Host: peer0.seller.example.com
-        Port: 1251
-  
-  - &SellerBank
-    Name: SellerBankMSP
-    ID: SellerBankMSP
-    MSPDir: ../organizations/peerOrganizations/sellerbank.example.com/msp
-    Policies:
-      Readers:
-        Type: Signature
-        Rule: "OR('SellerBankMSP.admin', 'SellerBankMSP.peer', 'SellerBankMSP.client')"
-      Writers:
-        Type: Signature
-        Rule: "OR('SellerBankMSP.admin', 'SellerBankMSP.client')"
-      Admins:
-        Type: Signature
-        Rule: "OR('SellerBankMSP.admin')"
-      Endorsement:
-        Type: Signature
-        Rule: "OR('SellerBankMSP.peer')"
-    AnchorPeers:
-      - Host: peer0.sellerbank.example.com
-        Port: 1351
-
-  - &SellerCP
-    Name: SellerCPMSP
-    ID: SellerCPMSP
-    MSPDir: ../organizations/peerOrganizations/sellercp.example.com/msp
-    Policies:
-      Readers:
-        Type: Signature
-        Rule: "OR('SellerCPMSP.admin', 'SellerCPMSP.peer', 'SellerCPMSP.client')"
-      Writers:
-        Type: Signature
-        Rule: "OR('SellerCPMSP.admin', 'SellerCPMSP.client')"
-      Admins:
-        Type: Signature
-        Rule: "OR('SellerCPMSP.admin')"
-      Endorsement:
-        Type: Signature
-        Rule: "OR('SellerCPMSP.peer')"
-    AnchorPeers:
-      - Host: peer0.sellercp.example.com
-        Port: 1451
 
 ################################################################################
 #
@@ -337,7 +211,7 @@ Channel: &ChannelDefaults
 #
 ################################################################################
 Profiles:
-  SevenOrganizationsChannel:
+  OrganicFoodChannel:
     <<: *ChannelDefaults
     Orderer:
       <<: *OrdererDefaults
@@ -354,11 +228,5 @@ Profiles:
     Application:
       <<: *ApplicationDefaults
       Organizations:
-        - *Buyer
-        - *BuyerBank
-        - *BuyerCP
-        - *MiddleBank
-        - *Seller
-        - *SellerBank
-        - *SellerCP
+        - *OrganicFood
       Capabilities: *ApplicationCapabilities

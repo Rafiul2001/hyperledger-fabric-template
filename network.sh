@@ -27,7 +27,7 @@ get_channel_info() {
 # Create Genesis Block:
 export FABRIC_CFG_PATH=${PWD}/compose/docker/peercfg
 cd configtx/
-configtxgen -profile SevenOrganizationsChannel -outputBlock ../channel-artifacts/portchannel.block -channelID portchannel
+configtxgen -profile OrganicFoodChannel -outputBlock ../channel-artifacts/foodsupplychannel.block -channelID foodsupplychannel
 cd ..
 
 # Join the orderer to all channels:
@@ -37,37 +37,12 @@ export ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers
 export ORDERER_ADMIN_TLS_SIGN_CERT=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.crt
 export ORDERER_ADMIN_TLS_PRIVATE_KEY=${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/tls/server.key
 
-osnadmin channel join --channelID portchannel --config-block ./channel-artifacts/portchannel.block -o localhost:7053 --ca-file "$ORDERER_CA" --client-cert "$ORDERER_ADMIN_TLS_SIGN_CERT" --client-key "$ORDERER_ADMIN_TLS_PRIVATE_KEY"
+osnadmin channel join --channelID foodsupplychannel --config-block ./channel-artifacts/foodsupplychannel.block -o localhost:7053 --ca-file "$ORDERER_CA" --client-cert "$ORDERER_ADMIN_TLS_SIGN_CERT" --client-key "$ORDERER_ADMIN_TLS_PRIVATE_KEY"
 
 
 
 # Join peers to the channel:
-join_peer_to_channel localhost:8051 "BuyerMSP" "${PWD}/organizations/peerOrganizations/buyer.example.com/peers/peer0.buyer.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/buyer.example.com/users/Admin@buyer.example.com/msp" portchannel
-
-join_peer_to_channel localhost:9051 "BuyerBankMSP" "${PWD}/organizations/peerOrganizations/buyerbank.example.com/peers/peer0.buyerbank.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/buyerbank.example.com/users/Admin@buyerbank.example.com/msp" portchannel
-
-join_peer_to_channel localhost:1051 "BuyerCPMSP" "${PWD}/organizations/peerOrganizations/buyercp.example.com/peers/peer0.buyercp.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/buyercp.example.com/users/Admin@buyercp.example.com/msp" portchannel
-
-join_peer_to_channel localhost:1151 "MiddleBankMSP" "${PWD}/organizations/peerOrganizations/middlebank.example.com/peers/peer0.middlebank.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/middlebank.example.com/users/Admin@middlebank.example.com/msp" portchannel
-
-join_peer_to_channel localhost:1251 "SellerMSP" "${PWD}/organizations/peerOrganizations/seller.example.com/peers/peer0.seller.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/seller.example.com/users/Admin@seller.example.com/msp" portchannel
-
-join_peer_to_channel localhost:1351 "SellerBankMSP" "${PWD}/organizations/peerOrganizations/sellerbank.example.com/peers/peer0.sellerbank.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/sellerbank.example.com/users/Admin@sellerbank.example.com/msp" portchannel
-
-join_peer_to_channel localhost:1451 "SellerCPMSP" "${PWD}/organizations/peerOrganizations/sellercp.example.com/peers/peer0.sellercp.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/sellercp.example.com/users/Admin@sellercp.example.com/msp" portchannel
-
+join_peer_to_channel localhost:8051 "OrganicFoodMSP" "${PWD}/organizations/peerOrganizations/organicfood.example.com/peers/peer0.organicfood.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/organicfood.example.com/users/Admin@organicfood.example.com/msp" foodsupplychannel
 
 # Peer Channel Info:
-get_channel_info localhost:8051 "BuyerMSP" "${PWD}/organizations/peerOrganizations/buyer.example.com/peers/peer0.buyer.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/buyer.example.com/users/Admin@buyer.example.com/msp" portchannel
-
-get_channel_info localhost:9051 "BuyerBankMSP" "${PWD}/organizations/peerOrganizations/buyerbank.example.com/peers/peer0.buyerbank.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/buyerbank.example.com/users/Admin@buyerbank.example.com/msp" portchannel
-
-get_channel_info localhost:1051 "BuyerCPMSP" "${PWD}/organizations/peerOrganizations/buyercp.example.com/peers/peer0.buyercp.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/buyercp.example.com/users/Admin@buyercp.example.com/msp" portchannel
-
-get_channel_info localhost:1151 "MiddleBankMSP" "${PWD}/organizations/peerOrganizations/middlebank.example.com/peers/peer0.middlebank.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/middlebank.example.com/users/Admin@middlebank.example.com/msp" portchannel
-
-get_channel_info localhost:1251 "SellerMSP" "${PWD}/organizations/peerOrganizations/seller.example.com/peers/peer0.seller.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/seller.example.com/users/Admin@seller.example.com/msp" portchannel
-
-get_channel_info localhost:1351 "SellerBankMSP" "${PWD}/organizations/peerOrganizations/sellerbank.example.com/peers/peer0.sellerbank.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/sellerbank.example.com/users/Admin@sellerbank.example.com/msp" portchannel
-
-get_channel_info localhost:1451 "SellerCPMSP" "${PWD}/organizations/peerOrganizations/sellercp.example.com/peers/peer0.sellercp.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/sellercp.example.com/users/Admin@sellercp.example.com/msp" portchannel
+get_channel_info localhost:8051 "OrganicFoodMSP" "${PWD}/organizations/peerOrganizations/organicfood.example.com/peers/peer0.organicfood.example.com/tls/ca.crt" "${PWD}/organizations/peerOrganizations/organicfood.example.com/users/Admin@organicfood.example.com/msp" foodsupplychannel
